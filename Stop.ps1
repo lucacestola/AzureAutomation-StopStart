@@ -43,7 +43,7 @@ function Get-AzureRmVMStatus {
     [string]
     $Name = '*'
   )
-  Get-AzureRmVM -ResourceGroupName $ResourceGroupName | ? {$_.Tags.Keys -eq "Stop" -and $_.Tags.Values -eq "$StopType"} |
+  Get-AzureRmVM -ResourceGroupName $ResourceGroupName | ? {$_.Tags["Stop"] -eq "$StopType"} |
     Get-AzureRmVM -Status |
     Select-Object -Property Name, Statuses, ResourceGroupName |
     Where-Object {$_.Name -like $Name} |
